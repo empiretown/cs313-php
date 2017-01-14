@@ -1,0 +1,5 @@
+
+ChangePicture {
+  picname = getElementById('turtlepic');
+
+}
