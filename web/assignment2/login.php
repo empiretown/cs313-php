@@ -5,16 +5,16 @@
 </head>
 
 <body>
-	<p>Log in Page</p>
+	<div style="text-align: center;">
+		<br/><br/>
+		<p>Please log in:</p>
 
-	<form action="authenticate.php" method="post">
+		<form action="authenticate.php" method="post">
+			<input type="text" name="username" placeholder="username"><br/><br/>
+			<input type="submit" value="Login">
+		</form>
 
-		<input type="text" name="username" placeholder="username">
-		<br>
-		<input type="submit" value="Login">
-
-	</form>
-
+	</div>
 </body>
 
 </html>
