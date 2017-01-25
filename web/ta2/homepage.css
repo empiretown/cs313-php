@@ -1,0 +1,26 @@
+#HeaderDiv {
+  font-weight: bold;
+  text-align: center;
+}
+#centeredTextDiv {
+  text-align: center;
+  width = 33%;
+}
+
+#hpimage {
+  margin:auto;
+  background-image: url('turtle.jpg');
+  height: 333px;
+  width: 500px;
+}
+
+#hpimage:hover {
+  margin:auto;
+  background-image: url('turtleeat.jpg');
+  height: 333px;
+  width: 500px;
+}
+
+#noBulletPoints {
+  list-style-type: none;
+}
