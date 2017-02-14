@@ -65,7 +65,7 @@ VALUES
 ;
 
 CREATE USER brother_burton WITH PASSWORD 'bradismyfavoritestudent';
-GRANT SELECT, INSERT, UPDATE ON item TO brother_burton;
+GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO brother_burton;
 
 -- NOT WORKING YET --
 INSERT INTO itemAttributes

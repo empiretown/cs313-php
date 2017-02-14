@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION["user"])) {
+	header("Location: login.php"); /* Redirect browser */
+	exit();
+}
+$username = $_SESSION["user"];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,4 +67,37 @@
     echo $id2 . " - " . $username . " - " . $password . " - " . $currency . "<br/>";
   }
 
+  $statement3 = $db->prepare("SELECT p.username, i.itemname, i.rarity FROM player p
+                              INNER JOIN userTOitems u on p.id = u.player_id
+                              INNER JOIN item i on u.item_id = i.id");
+  $statement3->execute();
+
+  echo "<br/>";
+  echo "This is each players items data <br/>";
+  echo "<table style='width:40%; border:1px solid black;'>";
+
+  echo "<tr>";
+  echo "<th> Username </th>";
+  echo "<th> Item Name </th>";
+  echo "<th> Item Rarity </th>";
+  echo "</tr>";
+  // Go through each result
+  while($row3 = $statement3->fetch(PDO::FETCH_ASSOC))
+  {
+    $username = $row3['username'];
+    $itemname = $row3['itemname'];
+    $rarity = $row3['rarity'];
+
+    echo "<tr>";
+    echo "<td>" . $username . "</td>";
+    echo "<td>" . $itemname . "</td>";
+    echo "<td>" . $rarity . "</td>";
+    echo "</tr>";
+  }
+  echo "</table>";
+
   ?>
+  <br/><br/>
+  <a href="logout.php">Logout</a>
+</body>
+</html>

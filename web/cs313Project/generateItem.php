@@ -26,8 +26,8 @@ function generateItem()
 
   //variables to be used for the name
   $baseName;
-  $prefix;
-  $suffix;
+  $prefix = NULL;
+  $suffix = NULL;
   $fullName;
 
   //data array for item generation
@@ -113,10 +113,14 @@ function generateItem()
 
   // set the full item name, check for NULL prefix or suffix before adding
   if($prefix) {
-    $fullName .= $prefix;
+    $fullName = $prefix;
     $fullName .= " ";
+    $fullName .= $baseName;
   }
-  $fullName .= $baseName;
+  else {
+    $fullName = $baseName;
+  }
+
   if($suffix) {
     $fullName .= " ";
     $fullName .= $suffix;
@@ -152,4 +156,4 @@ function getQuality() {
 
   return $quality;
 }
- ?>
+?>

@@ -14,11 +14,11 @@ class Item {
     public $setRarity = 'setRarity'; //
     public $setItemName = 'setItemName'; //
     public $setAttr1 = 'setAttr1'; //
-    public $setAttr1 = 'setAttr2'; //
-    public $setAttr1 = 'setAttr3'; //
+    public $setAttr2 = 'setAttr2'; //
+    public $setAttr3 = 'setAttr3'; //
     public $setVal1 = 'setVal1'; //
-    public $setVal1 = 'setVal2'; //
-    public $setVal1 = 'setVal3'; //
+    public $setVal2 = 'setVal2'; //
+    public $setVal3 = 'setVal3'; //
 
     // value setters
     function setRarity($rarity) {
