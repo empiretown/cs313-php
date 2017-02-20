@@ -2,7 +2,7 @@ CREATE TABLE player
 (
   id              SERIAL PRIMARY KEY 	NOT NULL
 , username        VARCHAR(25) 		   	NOT NULL
-, password        VARCHAR(25) 	    	NOT NULL
+, password        VARCHAR(255) 	    	NOT NULL
 , currency        INT                	NOT NULL
 );
 
@@ -16,8 +16,8 @@ CREATE TABLE item
 CREATE TABLE itemAttributes
 (
 	id 	            SERIAL PRIMARY KEY  NOT NULL
-,	attribute1 		  VARCHAR(25) 		    NOT NULL
-,	val1				    INT 							  NOT NULL
+,	attribute 		  VARCHAR(25) 		    NOT NULL
+,	value				    INT 							  NOT NULL
 ,	item_id				  INT 				  			NOT NULL REFERENCES item(id)
 );
 
@@ -35,6 +35,28 @@ CREATE TABLE sellBoard
 ,	item_id				  INT 							  NOT NULL REFERENCES item(id)
 ,	price					  INT 							  NOT NULL
 );
+
+CREATE USER brother_burton WITH PASSWORD 'bradismyfavoritestudent';
+
+GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO brother_burton;
+
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public to brother_burton;
+
+
+-- everything past this point is not needed
+
+SELECT p.username, i.itemname, i.rarity, a.attribute FROM player p
+                            INNER JOIN userTOitems u on p.id = u.player_id
+                            INNER JOIN item i on u.item_id = i.id
+                            INNER JOIN itemAttributes a on i.id = a.item_id
+                            WHERE p.id = 17;
+
+SELECT i.itemname, i.rarity, a.attribute FROM player p
+                            INNER JOIN userTOitems u on p.id = u.player_id
+                            INNER JOIN item i on u.item_id = i.id
+                            INNER JOIN itemAttributes a on i.id = a.item_id
+                            WHERE p.id = 17;
+
 
 INSERT INTO item
 (itemName, rarity)
@@ -62,23 +84,4 @@ VALUES
 , (2, 3)
 , (2, 5)
 , (3, 1)
-;
-
-CREATE USER brother_burton WITH PASSWORD 'bradismyfavoritestudent';
-GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO brother_burton;
-
--- NOT WORKING YET --
-INSERT INTO itemAttributes
-(attribute1, val1)
-VALUES
-  ('Attack', 2)
-, ('Attack', 3)
-, ('Crit', 5)
-, ('Defense', 3)
-, ('Evasion', 7)
-, ('Defense', 8)
-, ('Health', 30)
-, ('Attack', 100)
-, ('Crit', 50)
-, ('MultiHit', 5)
 ;

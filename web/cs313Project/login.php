@@ -19,12 +19,12 @@
 
 		<p>Or create an account</p> <br/>
 		<form action="createUser.php" method="post">
-			<input type="text" name="usernameC" placeholder="username"><br/><br/>
-      <input type="text" name="passwordC" placeholder="password"><br/><br/>
+			<input type="text" name="usernameC" placeholder="Username"><br/><br/>
+      <input type="text" name="passwordC" placeholder="Password"><br/><br/>
+			<input type="text" name="passwordC2" placeholder="Reenter Password"><br/><br/>
 			<input type="submit" value="Create User">
 		</form>
 
 	</div>
 </body>
-
 </html>

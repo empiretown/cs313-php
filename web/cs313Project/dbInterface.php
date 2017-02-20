@@ -1,10 +1,12 @@
+<!-- THIS PAGE IS PURELY FOR DATABASE VIEWING PURPOSES -->
+
 <?php
 session_start();
-if (!isset($_SESSION["user"])) {
+if (!isset($_SESSION["username"])) {
 	header("Location: login.php"); /* Redirect browser */
 	exit();
 }
-$username = $_SESSION["user"];
+$username = $_SESSION["username"];
 ?>
 
 <!DOCTYPE html>
@@ -13,27 +15,11 @@ $username = $_SESSION["user"];
 </head>
 
 <body>
-  <h1> CS313 Project </h1>
+  <h1> CS313 Project Database</h1>
 
   <?php //connect to database
 
-  // variables
-  $dbUser = 'brother_burton';
-  $dbPassword = 'bradismyfavoritestudent';
-  $dbName = 'postgres';
-  $dbHost = 'localhost';
-  $dbPort = '5432';
-
-  try
-  {
-    // create pdo connection
-    $db = new PDO("pgsql:host=$dbHost;port=$dbPort;dbname=$dbName", $dbUser, $dbPassword);
-  } catch (PDOException $ex)
-  {
-    // print the error
-    echo "Error connecting to DB. Details: $ex";
-    die();
-  }
+  require_once('dbConnect.php');
 
   echo "This is the dummy item data <br/>";
   // Show the dummy data in the item table

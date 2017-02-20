@@ -1,33 +1,27 @@
 <?php
-session_start();
+  session_start();
 
-$username = htmlspecialchars($_POST["usernameC"]);
-$password = htmlspecialchars($_POST["passwordC"]);
-$currency = 9000;
+  $username = htmlspecialchars($_POST["usernameC"]);
+  $password = htmlspecialchars($_POST["passwordC"]);
+  $password2 = htmlspecialchars($_POST["passwordC2"]);
+  $currency = 9000;
 
-// variables
-$dbUser = 'brother_burton';
-$dbPassword = 'bradismyfavoritestudent';
-$dbName = 'postgres';
-$dbHost = 'localhost';
-$dbPort = '5432';
+  if (strcmp($password, $password2) == 0) {
 
-try
-{
-  // create pdo connection
-  $db = new PDO("pgsql:host=$dbHost;port=$dbPort;dbname=$dbName", $dbUser, $dbPassword);
-} catch (PDOException $ex)
-{
-  // print the error
-  echo "Error connecting to DB. Details: $ex";
-  die();
+    $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+    require_once('dbConnect.php');
+
+    // Insert the user data in the player table
+    $statement = $db->prepare("INSERT INTO player (username, password, currency)
+                               VALUES (:username, :passwordHashed, :currency)");
+    $statement->bindValue(":username", $username, PDO::PARAM_STR);
+    $statement->bindValue(":passwordHashed", $passwordHashed, PDO::PARAM_STR);
+    $statement->bindValue(":currency", $currency, PDO::PARAM_INT);
+    $statement->execute();
 }
+else {
 
-// Show the user data in the player table
-
-$statement = $db->prepare("INSERT INTO player (username, password, currency) VALUES ('$username', '$password', $currency)");
-$statement->execute();
-
-header("Location: login.php");
+}
+  header("Location: login.php");
 
 ?>
