@@ -38,7 +38,7 @@ CREATE TABLE sellBoard
 
 CREATE USER brother_burton WITH PASSWORD 'bradismyfavoritestudent';
 
-GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO brother_burton;
+GRANT SELECT, INSERT, DELETE, UPDATE ON ALL TABLES IN SCHEMA public TO brother_burton;
 
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public to brother_burton;
 
@@ -84,4 +84,18 @@ VALUES
 , (2, 3)
 , (2, 5)
 , (3, 1)
+;
+
+INSERT INTO sellBoard
+(player_id, item_id, price)
+VALUES
+  (2, 48, 4000)
+, (5, 49, 2000)
+;
+
+INSERT INTO itemAttributes
+(attribute, value, item_id)
+VALUES
+  ('Health', 32, 48)
+, ('Attack', 25, 49)
 ;

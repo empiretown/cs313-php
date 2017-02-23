@@ -11,7 +11,7 @@
 
 		<form action="authenticate.php" method="post">
 			<input type="text" name="username" placeholder="username"><br/><br/>
-      <input type="text" name="password" placeholder="password"><br/><br/>
+      <input type="password" name="password" placeholder="password"><br/><br/>
 			<input type="submit" value="Login">
 		</form>
 
@@ -20,8 +20,8 @@
 		<p>Or create an account</p> <br/>
 		<form action="createUser.php" method="post">
 			<input type="text" name="usernameC" placeholder="Username"><br/><br/>
-      <input type="text" name="passwordC" placeholder="Password"><br/><br/>
-			<input type="text" name="passwordC2" placeholder="Reenter Password"><br/><br/>
+      <input type="password" name="passwordC" placeholder="Password"><br/><br/>
+			<input type="password" name="passwordC2" placeholder="Reenter Password"><br/><br/>
 			<input type="submit" value="Create User">
 		</form>
 

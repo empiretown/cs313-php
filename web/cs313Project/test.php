@@ -14,7 +14,12 @@
     <?php
 ////////////////// TEST CODE HERE ////////////////////////
 session_start();
-require_once('class.item.php');
+
+$itemId = $_POST["itemId"];
+$sellPrice = $_POST["sellPrice"];
+
+echo "Item id: " . $itemId . "   Sellprice: " . $sellPrice . "<br/>";
+
 
 
 ///////////////////// UP TO HERE ////////////////////////

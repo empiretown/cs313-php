@@ -6,7 +6,7 @@ if (!isset($_SESSION["username"])) {
 }
 require_once('dbConnect.php');
 
-$itemIdCheck = -1;
+//$itemIdCheck = -1;
 $username = $_SESSION["username"];
 $playerId = $_SESSION["playerId"];
 $currency = $_SESSION["currency"];
@@ -40,7 +40,7 @@ $currency = $_SESSION["currency"];
       echo "<th> Item Rarity </th>";
       echo "<th> Attribute </th>";
       echo "<th> Value </th>";
-  
+
       echo "<th> SELL </th>";
       echo "</tr>";
 
@@ -49,7 +49,8 @@ $currency = $_SESSION["currency"];
                                  INNER JOIN userTOitems u on p.id = u.player_id
                                  INNER JOIN item i on u.item_id = i.id
                                  INNER JOIN itemAttributes a on i.id = a.item_id
-                                 WHERE p.id = $playerId;");
+                                 WHERE p.id = :playerId;");
+      $statement->bindValue(":playerId", $playerId, PDO::PARAM_INT);
       $statement->execute();
 
       // Go through each result
@@ -66,7 +67,7 @@ $currency = $_SESSION["currency"];
           echo "<td>" . $itemId . "</td>";
           echo "<td>" . $itemname . "</td>";
           echo "<td>" . $rarity . "</td>";
-          $itemIdCheck = $itemId;
+          //$itemIdCheck = $itemId;
       //  }
 
         echo "<td>" . $attribute . "</td>";
@@ -74,7 +75,8 @@ $currency = $_SESSION["currency"];
 
           echo "<td>";
           echo "<form action='sellItem.php' method='post'>
-    	           <input type='text' name='sellPrice' placeholder='Enter Sell Price'>
+                 <input type='hidden' name='itemId' value='$itemId'>
+    	           <input type='text' name='sellPrice' placeholder='Enter Sell Price' required>
     		         <input type='submit' value='Sell Item'>
     		        </form>";
         echo "</td>";
@@ -87,11 +89,13 @@ $currency = $_SESSION["currency"];
 
     <form action="generateItem.php" method="post">
       <!--input type="hidden" name="userId"><br/><br/-->
-      <input type="submit" value="Buy an item">
+      <input type="submit" value="Gamble for a new item!">
     </form>
     <br/><br/>
 
     <a href="dbInterface.php">Show me the whole Database</a>
+    <br/>
+    <a href="SellBoard.php">Show me the SellBoard</a>
     <br/>
     <a href="logout.php">Logout</a>
 	</div>
