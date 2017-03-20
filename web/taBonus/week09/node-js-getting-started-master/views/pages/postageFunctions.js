@@ -1,59 +1,9 @@
-var express = require('express');
-var app = express();
-var url = require('url');
 
-app.set('port', (process.env.PORT || 5000));
-
-app.use(express.static(__dirname + '/public'));
-
-// views is directory for all template files
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-
-app.get('/', function(request, response) {
-  response.render('pages/index');
-});
-
-app.get('/postageDisplay', function(request, response) {
-
-  var requestUrl = url.parse(request.url, true);
-
-  console.log("Query parameters: " + JSON.stringify(requestUrl.query));
-
-  var postageType = requestUrl.query.postageType;      // $_GET["postageType"]
-  var weight      = Number(requestUrl.query.weight);   // $_GET["weight"]
-
-  var result = 0;
-
-  if(postageType == "lettersS") {
-    result = lettersSCalc(weight);
-  }
-  else if (postageType == "lettersM") {
-    result = lettersMCalc(weight);
-  }
-  else if (postageType == "envelopes") {
-    result = envelopesCalc(weight);
-  }
-  else if (postageType == "parcels") {
-    result = parcelsCalc(weight);
-  }
-
-  // Set up a JSON object of the values we want to pass along to the EJS result page
-  var params = {postageType: postageType, weight: weight, result: result};
-
-  response.render('pages/postageDisplay', params);
-});
-
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
-
-//functions since I have no idea how to include funtions from another files
 function lettersSCalc(weight) {
 
   var result;
 
-  if(weight <= 1) {
+  if(weight <= 1){
     return result = 0.49;
   }
   else if (weight <= 2) {
@@ -74,7 +24,7 @@ function lettersMCalc(weight) {
 
   var result;
 
-  if(weight <= 1) {
+  if(weight <= 1){
     return result = 0.46;
   }
   else if (weight <= 2) {
@@ -89,13 +39,14 @@ function lettersMCalc(weight) {
   else {
     return result = -1;
   }
+
 }
 
 function envelopesCalc(weight) {
 
   var result;
 
-  if(weight <= 1) {
+  if(weight <= 1){
     return result = 0.98;
   }
   else if (weight <= 2) {
@@ -143,7 +94,7 @@ function parcelsCalc(weight) {
 
     var result;
 
-    if(weight <= 4) {
+    if(weight <= 4){
       return result = 2.67;
     }
     else if (weight <= 5) {
@@ -177,4 +128,3 @@ function parcelsCalc(weight) {
       return result = -1;
     }
 }
-// end functions
