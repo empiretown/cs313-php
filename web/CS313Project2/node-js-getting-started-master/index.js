@@ -18,7 +18,7 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
-app.get('/authenticate', function(request, response) {
+app.post('/authenticate', function(request, response) {
 
   if (request.method == 'POST') {
       var body = '';
@@ -30,7 +30,7 @@ app.get('/authenticate', function(request, response) {
               request.connection.destroy();
           }
       });
-      request.on('end', function () {
+      request.on('end', function() {
 
           var POST = qs.parse(body);
           // use POST

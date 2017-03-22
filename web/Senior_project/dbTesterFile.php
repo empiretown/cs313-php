@@ -1,8 +1,8 @@
 <DOCUTYPE! html>
 <html>
-<head>
-<title>dbtester</title>
-</head>
+  <head>
+    <title>dbtester</title>
+  </head>
 <body>
 <h1>Here is some stuff ya'll</h1>
 
