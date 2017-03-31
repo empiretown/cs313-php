@@ -47,7 +47,7 @@ CREATE TABLE account_holder_to_bank_account
 (
   id                  SERIAL PRIMARY KEY
 , account_holder_id   INT                  NOT NULL REFERENCES account_holder(id)
-, bank_account        INT                  NOT NULL REFERENCES bank_account(id)
+, bank_account_id     INT                  NOT NULL REFERENCES bank_account(id)
 );
 
 --Pending Deposit
@@ -56,7 +56,7 @@ CREATE TABLE pending_deposit
 (
   id                 SERIAL PRIMARY KEY
 , account_holder_id  INT                 NOT NULL REFERENCES account_holder(id)
-, bank_account       INT                 NOT NULL REFERENCES bank_account(id)
+, bank_account_id    INT                 NOT NULL REFERENCES bank_account(id)
 , deposit_amount     MONEY               NOT NULL
 , check_front        BYTEA               NOT NULL
 , check_back         BYTEA               NOT NULL
@@ -86,9 +86,26 @@ VALUES ('Brad Marx');
 INSERT INTO account_holder(name)
 VALUES ('Israel Carvajal');
 
+
+
+----------------------ACTUAL INSERT ----------------------------------
+
 ----INSERT Megan Carlson----
-INSERT INTO account_holder(name)
-VALUES ('Megan Carlson');
+INSERT INTO account_holder(name, username, password)
+VALUES ('Megan Carlson', 'Megan123', 'Megan123');
+
+----INSERT Megan Carlson----
+INSERT INTO bank_account(account_num, account_amount, transaction_history_id)
+VALUES (999, 9000, 1);
+
+----INSERT LINKER----
+INSERT INTO account_holder_to_bank_account(account_holder_id, bank_account_id)
+VALUES (1, 1);
+
+
+
+
+----------------------------------------------------------------------
 
 
 -----INSERT INTO BANK AGENTS-----
