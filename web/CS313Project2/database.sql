@@ -49,8 +49,8 @@ CREATE TABLE classgroup
 CREATE TABLE classuserTOgroup
 (
 	id 						SERIAL PRIMARY KEY  NOT NULL
-,	classUser_id	INT 							  NOT NULL REFERENCES classUser(id)
-,	group_id		  INT 							  NOT NULL REFERENCES group(id)
+,	classUser_id  INT 							  NOT NULL REFERENCES classUser(id)
+,	group_id      INT 							  NOT NULL REFERENCES classgroup(id)
 );
 
 --------------------------------
@@ -70,7 +70,7 @@ CREATE TABLE answer
   id             SERIAL PRIMARY KEY  NOT NULL
 , choice         VARCHAR(255)        NOT NULL
 , isAnswer       BOOLEAN             NOT NULL
-,	question_id		 INT 							   NOT NULL REFERENCES question(id)
+,	question_id    INT 							   NOT NULL REFERENCES question(id)
 );
 
 --------------------------------
@@ -79,8 +79,8 @@ CREATE TABLE answer
 CREATE TABLE quizTOquestion
 (
 	id 						SERIAL PRIMARY KEY  NOT NULL
-,	quiz_id			  INT 							  NOT NULL REFERENCES quiz(id)
-,	question_id		INT 							  NOT NULL REFERENCES question(id)
+,	quiz_id			  INT 					      NOT NULL REFERENCES quiz(id)
+, question_id   INT 	              NOT NULL REFERENCES question(id)
 );
 
 --------------------------------
