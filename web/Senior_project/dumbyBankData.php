@@ -1,12 +1,10 @@
+
 <?php
 session_start();
 
 require_once('dbConnect.php');
 
-//$username     = $_SESSION["username"];
-$firstName    = "dumby data";
-//$lastName     = $_SESSION["lastName"];
-
+$firstName = "dumby data";
 ?>
 
 <!DOCTYPE html>
@@ -33,10 +31,10 @@ $firstName    = "dumby data";
 
       $one = 1;
 
-      $statement = $db->prepare("SELECT a.name, b.account_num, b.account_amount, b.transaction_history_id
+      $statement = $db->prepare("SELECT a.name, b.account_num, b.account_amount
                                  FROM account_holder a
                                  INNER JOIN account_holder_to_bank_account t on a.id = t.account_holder_id
-                                 INNER JOIN bank_account b on t.bank_account_id = b.id
+                                 INNER JOIN bank_account b on t.bank_account_id  = b.id
                                  WHERE a.id = :one;");
       $statement->bindValue(":one", $one, PDO::PARAM_INT);
       $statement->execute();

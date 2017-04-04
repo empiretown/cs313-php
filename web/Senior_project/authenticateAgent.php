@@ -1,6 +1,6 @@
 <?php
 // connect to the database
-require_once('dbConnect.php');
+require_once('dbconnect.php');
 
 // recieve the username and password
 $username = htmlspecialchars($_POST["username"]);
@@ -29,7 +29,7 @@ if(password_verify($password, $passwordHashed)){
 
   // set session variables
   $_SESSION["username"]     = $username;
-  $_SESSION["bankerId"]     = $playerId;
+  $_SESSION["bankerId"]     = $bankerId;
   $_SESSION["employee_num"] = $employee_num;
   $_SESSION["firstName"]    = $firstName;
   $_SESSION["lastName"]     = $lastName;

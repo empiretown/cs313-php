@@ -3,14 +3,14 @@ var express = require('express');
 var app = express();
 var url = require('url');
 var qs = require('querystring');
+
 const pg = require('pg');
 const connectionString = process.env.DATABASE_URL ||
 'postgres://brother_burton:bradismyfavoritestudent@localhost:5432/node';
 
 app.set('port', (process.env.PORT || 5000));
 
-
-app.use(express.static(__dirname + '/public/'));
+app.use(express.static(__dirname + '/public'));
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');
@@ -21,6 +21,9 @@ app.get('/', function(request, response) {
 });
 
 app.post('/authenticate', function(request, response) {
+
+  var params = [];
+  var isAdmin = false;
 
   if (request.method == 'POST') {
       var body = '';
@@ -48,7 +51,7 @@ app.post('/authenticate', function(request, response) {
           var password = POST.password; // $_POST["password"]
 
           const query = client.query(
-            "SELECT id, userName, password, firstName, lastName, isAdmin FROM classUser WHERE userName = 'joe'"
+            'SELECT id, userName, password, firstName, lastName, isAdmin FROM classUser WHERE userName = \'' + username + '\''
           );
           query.on('row', (row) => { // puts data into rows in results
              results.push(row);
@@ -60,21 +63,21 @@ app.post('/authenticate', function(request, response) {
           // no clue how to pull data out of the results tbh
           // guessing its something like this:
           var dbpassword = results.password;
-          var isAdmin    = results.isAdmin;
+          isAdmin        = results.isAdmin;
           var id         = results.id;
           var dbuserName = results.userName;
           var firstName  = results.firstName;
           var lastName   = results.lastName;
 
+
           if(dbpassword != password){
-            response.render('login.html');
+            response.render('pages/login');
           }
+
+          params = {id: id, userName: dbuserName, firstName: firstName, lastName: lastName};
           });
       });
   }
-
-  // Set up a JSON object of the values we want to pass along to the EJS result page
-  var params = {id: id, userName: userName, firstName: firstName, lastName: lastName};
 
   if(isAdmin) {
     response.render('pages/adminInterface', params);
@@ -125,12 +128,9 @@ app.post('/createUser', function(request, response) {
               [username, password, firstName, lastName, iNumber, isAdmin]
             );
 
-      //    query.on('row', (row) => { // puts data into rows in results
-      //       results.push(row);
-      //    });
           query.on('end', () => {
 
-            response.render('login.html');
+            response.render('pages/login');
           })
         }})
       }});

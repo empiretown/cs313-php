@@ -13,12 +13,12 @@ CREATE TABLE bank_agent
 
 --Transaction History
 --DROP TABLE transaction_history;
-CREATE TABLE transaction_history
+CREATE TABLE transaction_event
 (
   id                  SERIAL PRIMARY KEY
 , transaction_amount  MONEY                NOT NULL
 , transaction_date    DATE
-, bank_agent_id       INT                  NOT NULL REFERENCES bank_agent(id)
+---, bank_agent_id       INT                  NOT NULL REFERENCES bank_agent(id)
 );
 
 --Bank Accounts
@@ -28,7 +28,15 @@ CREATE TABLE bank_account
   id                      SERIAL PRIMARY KEY
 , account_num             INT                  NOT NULL
 , account_amount          MONEY                NOT NULL
-, transaction_history_id  INT                  NOT NULL REFERENCES transaction_history(id)
+);
+
+--Transaction History
+--DROP TABLE transaction_history;
+CREATE TABLE transaction_history
+(
+  id                    SERIAL PRIMARY KEY
+, transaction_event_id  INT                  NOT NULL REFERENCES transaction_event(id)
+, bank_account_id       INT                  NOT NULL REFERENCES bank_account(id)
 );
 
 --Account Holder

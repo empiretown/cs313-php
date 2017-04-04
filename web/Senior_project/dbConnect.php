@@ -31,7 +31,7 @@
   }
   else {
     // Get the various parts of the DB Connection from the URL
-    $dbUrl      = "postgres://gleqyowfltrnej:a5ea0a9b7169365279108e9db7595a0f0b331230a50f473310f55263da50c9@ec2-23-21-204-166.compute-1.amazonaws.com:5432/d7nhp1fnpuk1hk";
+    $dbUrl      = "postgres://gleqyowfltrnej:a54ea0a9b71693652791b08e9db7595a0f0b331230a50f473310f55263da50c9@ec2-23-21-204-166.compute-1.amazonaws.com:5432/d7nhp1fnpuklhk";
 	  $dbopts     = parse_url($dbUrl);
     $dbUser     = $dbopts["user"];
 	  $dbPassword = $dbopts["pass"];

@@ -3,7 +3,10 @@
 <head>
 	<title>Log in</title>
 </head>
+
 <body>
-HELLOWORLD
+	
+		<p>ERROR LOGGING IN</p>
+
 </body>
 </html>
